@@ -223,6 +223,7 @@ dialog form > p { color: #aaa5bc; font-size: 13px; line-height: 1.7; }
   color: #8b849b;
   font-size: 12px;
   line-height: 1.8;
+  margin-top: 170%;
 }
 
 .site-footer p {
@@ -250,17 +251,17 @@ dialog form > p { color: #aaa5bc; font-size: 13px; line-height: 1.7; }
 .result-label { display:block; margin: 24px 0 8px; font-size: 11px; letter-spacing: 2px; color:#c4a2ff; }
 .code-row { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
 .trip-code { font-size: clamp(24px, 6vw, 34px); letter-spacing: 3px; overflow-wrap:anywhere; }
-.dashboard { max-width: 900px; }
+.dashboard {margin-top:-18%; max-width: 900px; }
 .dashboard-top { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
 .dashboard-top .btn { flex-shrink:0; }
 .queue-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:32px 0 16px; }
-.queue-heading h3, .request-form h3 { margin:0; }
-.request-form { padding:20px; border:1px solid #ffffff16; border-radius:16px; background:#ffffff05; }
+.queue-heading h3, .request-form h3 { margin-top:0%; }
+.request-form {margin-top:80%; padding:20px; border:1px solid #ffffff16; border-radius:16px; background:#ffffff05; }
 .request-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 16px; }
 .request-form .field input { min-height:46px; }
 .request-error { margin:8px 0; }
 .success-message { color:#6ee7b7 !important; }
-.queue-list { display:grid; gap:12px; margin-top:18px; }
+.queue-list { display:grid; gap:12px; margin-top:-290%; }
 .song-card { display:grid; grid-template-columns:42px minmax(0,1fr) auto; align-items:center; gap:14px; padding:16px; border:1px solid #ffffff15; border-radius:15px; background:#ffffff05; }
 .song-number { color:#c4a2ff; font-weight:800; font-size:14px; }
 .song-details { min-width:0; }
