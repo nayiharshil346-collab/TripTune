@@ -110,7 +110,7 @@ function openForm(mode) {
       ? (mode === "host" && id === "hostPassword" ? "current-password" : "new-password")
       : "off";
     input.maxLength = id === "tripName" ? 70 : id === "memberName" || id === "hostName" ? 50 : 150;
-    if (isPassword) input.minLength = 12;
+    if (isPassword) input.minLength = 1;
     wrap.append(lab, input);
     fields.append(wrap);
   });
