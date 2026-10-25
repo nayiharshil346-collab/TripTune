@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0913">
+  <title>TripTune — Your Ride, Your Music</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<style>
+    .site-footer{
+      font-family:monospace;
+    }
+    .description{
+      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    }
+    .features article h3{
+      font-family:Verdana, Geneva, Tahoma, sans-serif
+    }
+    
+
+  </style>
+<body>
+  <header class="navbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">♫</span>
+      TripTune<span class="dot">.</span>
+    </a>
+    <span class="status"><span></span> Your group's soundtrack</span>
+  </header>
+
+  <main class="hero">
+    <div class="eyebrow">✦ MADE FOR THE JOURNEY</div>
+
+    <h1>Your Ride.<br>
+      <span>Your Music.</span><br>
+      Everyone's Choice.
+    </h1>
+
+
+    <section class="actions">
+      <button class="btn primary" id="createBtn">
+        <span>＋</span> Create New Trip
+      </button>
+      <button class="btn secondary" id="joinBtn">
+        <span>↗</span> Join a Trip
+      </button>
+      <button class="btn host" id="hostBtn">
+        <span>♛</span> Host Login
+      </button>
+    </section>
+
+     <p class="description">
+      One trip, one shared queue, everyone's favourite songs.
+      Request your tracks and let the host handle the playlist.
+    </p>
+<h3 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+">Features</h3>
+    <section class="features">
+      <article>
+        <span class="feature-icon purple">♫</span>
+        <h3>Everyone Requests</h3>
+        <p>Every member gets a voice.</p>
+      </article>
+      <article>
+        <span class="feature-icon blue">↻</span>
+        <h3>Always Saved</h3>
+        <p>Return to your trip later.</p>
+      </article>
+      <article>
+        <span class="feature-icon green">✓</span>
+        <h3>Host in Control</h3>
+        <p>Track played and skipped songs.</p>
+      </article>
+    </section>
+
+    <div class="footer-note">
+      BUILT FOR LONG ROADS & GOOD MUSIC
+    </div>
+  </main>
+
+  <dialog id="tripDialog">
+    <form id="tripForm">
+      <button type="button" class="close" id="closeDialog"
+        aria-label="Close">×</button>
+      <div class="eyebrow" id="dialogEyebrow">TRIPTUNE</div>
+      <h2 id="dialogTitle">Create your trip</h2>
+      <p id="dialogDescription">Set up your group's music room.</p>
+      <div id="dialogFields"></div>
+      <p id="formError" class="error" role="alert"></p>
+      <button class="btn primary full" id="submitBtn" type="submit">
+        Continue →
+      </button>
+    </form>
+  </dialog>
+
+<footer class="site-footer">
+  <p>© 2026 TripTune. All rights reserved.</p>
+  <p>Designed &amp; Developed by Harshil Nayi.</p>
+</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
