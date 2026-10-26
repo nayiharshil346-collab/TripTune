@@ -36,10 +36,10 @@ const configs = {
     description: "Create a room for your group. Use two different strong passwords.",
     button: "Create Trip",
     fields: [
-      ["hostName", "Your name", "e.g. Harshil", "text", false],
+      ["hostName", "Your name", "e.g. Tony Stark", "text", false],
       ["tripName", "Trip name", "e.g. Ahmedabad to Udaipur", "text", false],
-      ["memberPasskey", "Group passkey", "At least 12 characters", "password", true],
-      ["hostPassword", "Separate host password", "At least 12 characters", "password", true]
+      ["memberPasskey", "Group passkey", "Create a group passkey", "password", true],
+      ["hostPassword", "Your host password", "Create a separate host password", "password", true]
     ]
   },
   join: {
@@ -65,7 +65,7 @@ const configs = {
 };
 
 function readSession() {
-  try {
+  try {i
     const s = sessionStorage.getItem(SESSION_KEY);
     return s ? JSON.parse(s) : null;
   } catch { return null; }
@@ -206,13 +206,7 @@ function showDashboard() {
   top.append(intro, logout);
   panel.append(top);
 
-  const queueHeading = make("div", "queue-heading");
-  queueHeading.append(make("h3", "", "Shared song queue"));
-  const refresh = make("button", "btn secondary", "Refresh");
-  refresh.type = "button";
-  refresh.addEventListener("click", loadQueue);
-  queueHeading.append(refresh);
-  panel.append(queueHeading);
+  //////////////////////////////////////////////////
 
   const requestForm = make("form", "request-form");
   requestForm.innerHTML = `
@@ -253,7 +247,16 @@ function showDashboard() {
   panel.append(list);
   replaceMain(panel);
   loadQueue();
-  refreshTimer = setInterval(loadQueue, 12000);
+  refreshTimer = setInterval(loadQueue, 12);
+
+  const queueHeading = make("div", "queue-heading");
+  queueHeading.append(make("h3", "", "Shared Song Queue"));
+  const refresh = make("button", "btn secondary", "Refresh");
+  refresh.type = "button";
+  refresh.addEventListener("click", loadQueue);
+  queueHeading.append(refresh);
+  panel.append(queueHeading);
+  
 }
 
 async function loadQueue() {
