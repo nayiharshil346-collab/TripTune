@@ -1,4 +1,10 @@
+/* =========================================================
+   TripTune stylesheet
+   Sections: theme, page layout, landing page, buttons,
+   modal/forms, footer, dashboard, responsive layout.
+   ========================================================= */
 
+/* ---------- 1. Theme and reset ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -6,9 +12,12 @@
   color: #f8f7ff;
   background: #0b0913;
   font-synthesis: none;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+
+html { min-height: 100%; }
 
 body {
   margin: 0;
@@ -22,12 +31,15 @@ body {
 }
 
 button, input { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
 
+/* ---------- 2. Top navigation ---------- */
 .navbar {
-  height: 76px;
+  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   padding: 0 7%;
   border-bottom: 1px solid #ffffff12;
 }
@@ -38,6 +50,7 @@ button, input { font: inherit; }
   color: white;
   text-decoration: none;
   letter-spacing: -1px;
+  white-space: nowrap;
 }
 
 .brand-icon { color: #c4a2ff; margin-right: 9px; }
@@ -46,6 +59,7 @@ button, input { font: inherit; }
 .status {
   color: #aaa5bc;
   font-size: 12px;
+  text-align: right;
 }
 
 .status span {
@@ -57,11 +71,15 @@ button, input { font: inherit; }
   margin-right: 8px;
 }
 
-.hero {
+/* ---------- 3. Main content / landing page ---------- */
+/* flex: 1 allows the footer to sit at the bottom on short pages. */
+main.hero {
+  width: 100%;
   max-width: 900px;
-  margin: auto;
-  padding: 85px 24px 35px;
+  margin: 0 auto;
+  padding: 70px 24px 42px;
   text-align: center;
+  flex: 1 0 auto;
 }
 
 .eyebrow {
@@ -85,21 +103,19 @@ h1 span {
   color: transparent;
 }
 
-
-h1 p{
-   background: linear-gradient(90deg, #c4a2ff, #ff8ccf);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-top:1%;
-}
-
 .description {
   max-width: 540px;
   margin: 0 auto;
   color: #aaa5bc;
   line-height: 1.8;
   font-size: 15px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.features-title {
+  margin: 34px 0 16px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 21px;
 }
 
 .actions {
@@ -107,9 +123,10 @@ h1 p{
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin: 34px 0 70px;
+  margin: 34px 0 42px;
 }
 
+/* ---------- 4. Buttons ---------- */
 .btn {
   padding: 14px 21px;
   border-radius: 12px;
@@ -121,7 +138,9 @@ h1 p{
 }
 
 .btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+.btn:focus-visible { outline: 2px solid #c4a2ff; outline-offset: 3px; }
 .btn span { margin-right: 7px; }
+.btn:disabled { opacity: .6; cursor: wait; transform: none; }
 
 .primary {
   background: linear-gradient(120deg, #8052dc, #a34dd0);
@@ -133,9 +152,10 @@ h1 p{
 .host { background: #171425; }
 .full { width: 100%; }
 
+/* ---------- 5. Landing page feature cards ---------- */
 .features {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   text-align: left;
 }
@@ -160,18 +180,26 @@ h1 p{
 .blue { background: #3b82f626; color: #93c5fd; }
 .green { background: #10b98126; color: #6ee7b7; }
 
-.features h3 { font-size: 14px; margin: 18px 0 8px; }
+.features h3 {
+  font-size: 14px;
+  margin: 18px 0 8px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .features p { font-size: 12px; color: #aaa5bc; line-height: 1.7; }
 
 .footer-note {
-  margin-top: 52px;
+  margin-top: 42px;
   color: #625c72;
   font-size: 10px;
   letter-spacing: 3px;
 }
 
+/* ---------- 6. Login / create-trip dialog ---------- */
 dialog {
   width: min(420px, calc(100% - 32px));
+  max-height: min(90vh, 760px);
+  overflow-y: auto;
   border: 1px solid #ffffff20;
   border-radius: 20px;
   background: #151120;
@@ -186,6 +214,7 @@ dialog::backdrop {
 
 dialog h2 { margin: 18px 0 8px; }
 dialog form > p { color: #aaa5bc; font-size: 13px; line-height: 1.7; }
+
 .close {
   float: right;
   background: transparent;
@@ -205,6 +234,7 @@ dialog form > p { color: #aaa5bc; font-size: 13px; line-height: 1.7; }
 
 .field input {
   width: 100%;
+  min-height: 44px;
   padding: 13px;
   border-radius: 10px;
   background: #0b0913;
@@ -215,43 +245,29 @@ dialog form > p { color: #aaa5bc; font-size: 13px; line-height: 1.7; }
 
 .field input:focus { border-color: #a78bfa; }
 .error { color: #fda4af !important; min-height: 8px; }
+.success-message { color: #6ee7b7 !important; }
 
-@media (max-width: 600px) {
-  .navbar { padding: 0 20px; }
-  .status { font-size: 10px; }
-  .hero { padding-top: 65px; }
-  h1 { letter-spacing: -2px; }
-  .actions { flex-direction: column; margin-bottom: 45px; }
-  .features { grid-template-columns: 1fr; }
-  .features article { padding: 18px; }
-}
-
-/*/////////////// Footer ////////////////////*/
+/* ---------- 7. Footer ---------- */
+/* The footer is outside main; margin-top:auto pushes it down on short pages.
+   On a long dashboard, normal document flow puts it after all dashboard content. */
 .site-footer {
+  width: 100%;
   padding: 22px 16px;
   text-align: center;
   border-top: 1px solid #ffffff12;
   color: #8b849b;
   font-size: 12px;
   line-height: 1.8;
+  font-family: monospace;
   margin-top: auto;
   flex-shrink: 0;
 }
-.site-footer p {
-  margin: 4px 0;
-}
 
-@media (max-width: 480px) {
-  .site-footer {
-    padding: 18px 12px;
-    font-size: 11px;
-  }
-}
+.site-footer p { margin: 4px 0; }
 
-
-/* TripTune dashboard */
-.btn:disabled { opacity: .6; cursor: wait; transform: none; }
-.result-panel, .dashboard {
+/* ---------- 8. Trip-created result panel and dashboard ---------- */
+.result-panel,
+.dashboard {
   width: 100%;
   text-align: left;
   margin: 24px auto 40px;
@@ -261,43 +277,127 @@ dialog form > p { color: #aaa5bc; font-size: 13px; line-height: 1.7; }
   background: #ffffff08;
   box-shadow: 0 20px 70px #00000025;
 }
+
 .result-panel { max-width: 650px; }
-.result-panel h2, .dashboard h2 { margin: 12px 0; font-size: clamp(24px, 5vw, 34px); overflow-wrap: anywhere; }
+.result-panel h2,
+.dashboard h2 {
+  margin: 12px 0;
+  font-size: clamp(24px, 5vw, 34px);
+  overflow-wrap: anywhere;
+}
+
 .muted { color: #aaa5bc; line-height: 1.7; font-size: 14px; }
-.result-label { display: block; margin: 24px 0 8px; font-size: 11px; letter-spacing: 2px; color: #c4a2ff; }
+.result-label {
+  display: block;
+  margin: 24px 0 8px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #c4a2ff;
+}
+
 .code-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .trip-code { font-size: clamp(24px, 6vw, 34px); letter-spacing: 3px; overflow-wrap: anywhere; }
+
 .dashboard {
   max-width: 900px;
-  min-height: calc(100vh - 190px);
-  margin-top:-15%;
+  /* Keep dashboard content naturally tall; footer follows it instead of overlapping. */
+  min-height: 0;
 }
-.dashboard-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+
+.dashboard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
 .dashboard-top .btn { flex-shrink: 0; }
-.queue-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 32px 0 16px; }
-.queue-heading h3, .request-form h3 { margin-top: 0; }
-.request-form { margin-top: 24px; padding: 20px; border: 1px solid #ffffff16; border-radius: 16px; background: #ffffff05; }
-.request-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
-.request-form .field input { min-height: 46px; }
-.request-error { margin: 8px 0; }
-.success-message { color: #6ee7b7 !important; }
-.queue-list { display: grid; gap: 12px; margin-top: 16px; }
-.song-card { display: grid; grid-template-columns: 42px minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 16px; border: 1px solid #ffffff15; border-radius: 15px; background: #ffffff05; }
+
+/* Queue heading contains the queue title and Refresh button. */
+.queue-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 32px 0 16px;
+}
+
+.queue-heading h3,
+.request-form h3 { margin: 0; }
+
+/* Song queue list is deliberately rendered directly under Refresh. */
+.queue-list { display: grid; gap: 12px; margin-top: 0; }
+
+.empty-state {
+  text-align: center;
+  padding: 28px 16px;
+  color: #aaa5bc;
+  border: 1px dashed #ffffff20;
+  border-radius: 14px;
+}
+
+.song-card {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #ffffff15;
+  border-radius: 15px;
+  background: #ffffff05;
+}
+
 .song-number { color: #c4a2ff; font-weight: 800; font-size: 14px; }
 .song-details { min-width: 0; }
 .song-details h4 { margin: 0 0 5px; font-size: 15px; overflow-wrap: anywhere; }
 .song-details p { margin: 4px 0; font-size: 12px; }
 .requester { color: #d6cbea; }
 .song-link { color: #c4a2ff; font-size: 12px; }
-.status-pill { white-space: nowrap; padding: 6px 9px; border-radius: 999px; font-size: 11px; background: #ffffff0d; color: #d6cbea; }
+
+.status-pill {
+  white-space: nowrap;
+  padding: 6px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: #ffffff0d;
+  color: #d6cbea;
+}
+
 .status-pill.played { color: #6ee7b7; background: #10b9811b; }
 .status-pill.skipped { color: #fda4af; background: #fb71851b; }
 .song-card.status-played { opacity: .78; }
 .song-actions { display: flex; flex-wrap: wrap; gap: 7px; grid-column: 2 / -1; }
 .btn.small { padding: 10px 12px; font-size: 12px; min-height: 42px; }
 .played-btn { background: #104b3a; border-color: #236d57; }
-.empty-state { text-align: center; padding: 28px 16px; color: #aaa5bc; border: 1px dashed #ffffff20; border-radius: 14px; }
+
+/* Song request form intentionally appears BELOW the queue list. */
+.request-form {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid #ffffff16;
+  border-radius: 16px;
+  background: #ffffff05;
+}
+
+.request-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+
+.request-form .field input { min-height: 46px; }
+.request-error { margin: 8px 0; }
+
+/* ---------- 9. Responsive layout ---------- */
 @media (max-width: 600px) {
+  .navbar { padding: 0 20px; }
+  .status { font-size: 10px; }
+  main.hero { padding: 55px 18px 32px; }
+  h1 { letter-spacing: -2px; }
+  .actions { flex-direction: column; margin-bottom: 38px; }
+  .actions .btn { width: 100%; }
+  .features { grid-template-columns: 1fr; }
+  .features article { padding: 18px; }
   .dashboard-top { flex-direction: column; }
   .dashboard-top .btn { width: 100%; }
   .request-grid { grid-template-columns: minmax(0, 1fr); }
@@ -307,5 +407,209 @@ dialog form > p { color: #aaa5bc; font-size: 13px; line-height: 1.7; }
   .code-row { align-items: stretch; flex-direction: column; }
   .trip-code { letter-spacing: 2px; }
   .queue-heading { align-items: center; }
-  .dashboard { min-height: auto; margin-bottom: 24px; }
+  .queue-heading .btn { padding: 11px 14px; }
+  .site-footer { padding: 18px 12px; font-size: 11px; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+
+/* ---------- 10. Trip room header + live stats ---------- */
+.trip-room-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
+.trip-room-kicker{margin:0 0 8px;color:#b6a5e8;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+.trip-room-title{margin:0!important;font-size:clamp(25px,4vw,38px)!important;line-height:1.2}
+.trip-live-badge{display:inline-flex;align-items:center;gap:7px;flex-shrink:0;padding:9px 14px;color:#83f4bd;background:#0e9f6e2b;border:1px solid #34d39935;border-radius:999px;font-weight:700;font-size:12px}
+.trip-live-badge:before{content:"";width:8px;height:8px;border-radius:50%;background:#6ee7b7;box-shadow:0 0 12px #6ee7b7aa}
+.trip-route{margin:8px 0 0;color:#aaa5bc}
+.trip-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 28px}
+.trip-stat{min-width:0;padding:18px;border:1px solid #ffffff0c;border-radius:18px;background:#ffffff0b}
+.trip-stat-icon{display:block;font-size:23px;margin-bottom:10px}
+.trip-stat-number{display:block;font-size:clamp(27px,4vw,38px);font-weight:800;line-height:1.1}
+.trip-stat-label{display:block;color:#aaa5bc;margin-top:9px;font-size:13px}
+.trip-stat.members .trip-stat-icon{color:#c4a2ff}.trip-stat.requests .trip-stat-icon{color:#67e8f9}.trip-stat.played .trip-stat-icon{color:#6ee7b7}
+.queue-heading{margin-top:28px}.request-form{margin-top:28px}
+.request-form-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.request-form-head .btn{flex-shrink:0}
+@media(max-width:600px){.trip-room-header{gap:10px}.trip-live-badge{padding:8px 10px;font-size:11px}.trip-stats{gap:8px;margin:20px 0 24px}.trip-stat{padding:13px 11px;border-radius:15px}.trip-stat-icon{font-size:20px;margin-bottom:9px}.trip-stat-number{font-size:27px}.trip-stat-label{font-size:11px}.request-form-head{align-items:flex-start;flex-direction:column}.request-form-head .btn{width:100%}}
+
+
+
+/* ========== TRIPTUNE FEEDBACK SECTION ========== */
+
+.feedback-section {
+  width: min(760px, calc(100% - 32px));
+  margin: 35px auto 30px;
+  color: #fff;
+}
+
+.feedback-card {
+  padding: 32px 24px;
+  text-align: center;
+  background: linear-gradient(135deg, #171126, #100c19);
+  border: 1px solid #ffffff18;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px #00000020;
+}
+
+.feedback-tag {
+  color: #c4a2ff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.feedback-card h2 {
+  margin: 14px 0 10px;
+  font-size: clamp(24px, 4vw, 32px);
+}
+
+.feedback-card > p {
+  color: #aaa5bc;
+  line-height: 1.7;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+
+.feedback-open-btn,
+.feedback-submit-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 22px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(120deg, #8052dc, #a34dd0);
+  transition: transform .2s, filter .2s;
+}
+
+.feedback-open-btn:hover,
+.feedback-submit-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+}
+
+#feedbackFormWrap {
+  max-width: 520px;
+  margin: 28px auto 0;
+  text-align: left;
+}
+
+#feedbackFormWrap[hidden] {
+  display: none;
+}
+
+#feedbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.feedback-label {
+  margin-top: 8px;
+  color: #e4dff0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#feedbackForm input:not([type="radio"]),
+#feedbackForm textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  color: #fff;
+  background: #ffffff08;
+  border: 1px solid #ffffff20;
+  border-radius: 10px;
+  font: inherit;
+  outline: none;
+}
+
+#feedbackForm input:focus,
+#feedbackForm textarea:focus {
+  border-color: #a78bfa;
+}
+
+#feedbackForm textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+#feedbackForm input::placeholder,
+#feedbackForm textarea::placeholder {
+  color: #817b91;
+}
+
+/* Interactive star rating */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 5px;
+  margin: 2px 0 8px;
+}
+
+.star-rating input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.star-rating label {
+  color: #5a5368;
+  font-size: 35px;
+  cursor: pointer;
+  transition: color .15s, transform .15s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+  color: #fcd34d;
+}
+
+.star-rating input:focus-visible + label {
+  outline: 2px solid #c4a2ff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+#feedbackStatus {
+  min-height: 20px;
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #c4a2ff;
+}
+
+#feedbackStatus.success {
+  color: #6ee7b7;
+}
+
+#feedbackStatus.failure {
+  color: #fca5a5;
+}
+
+.feedback-submit-btn {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.feedback-submit-btn:disabled {
+  opacity: .65;
+  cursor: wait;
+  transform: none;
+}
+
+@media (max-width: 480px) {
+  .feedback-card {
+    padding: 25px 17px;
+  }
+
+  .star-rating label {
+    font-size: 32px;
+  }
+}
+
+/* ========== END FEEDBACK SECTION ========== */
