@@ -1,108 +1,183 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic page metadata -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b0913">
+  <meta name="description" content="TripTune lets everyone on a road trip request songs in one shared queue.">
   <title>TripTune — Your Ride, Your Music</title>
-  <link rel="stylesheet" href="style.css">
-  
-</head>
-<style>
-    .site-footer{
-      font-family:monospace;
-    }
-    .description{
-      font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-    }
-    .features article h3{
-      font-family:Verdana, Geneva, Tahoma, sans-serif
-    }
-    
 
-  </style>
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
+  <!-- Top navigation / brand -->
   <header class="navbar">
-    <a class="brand" href="#">
-      <span class="brand-icon">♫</span>
+    <a class="brand" href="./" aria-label="TripTune home">
+      <span class="brand-icon" aria-hidden="true">♫</span>
       TripTune<span class="dot">.</span>
     </a>
-    <span class="status"><span></span> Your group's soundtrack</span>
+    <span class="status"><span aria-hidden="true"></span> Your group's soundtrack</span>
   </header>
 
+  <!-- The JavaScript replaces this main content with the trip dashboard after login -->
   <main class="hero">
     <div class="eyebrow">✦ MADE FOR THE JOURNEY</div>
 
-    <h1>Your Group.<br>
+    <h1>Your Ride.<br>
       <span>Your Music.</span><br>
-     Everyone's 
-      <p>Choice.</p>
+      Everyone's Choice.
     </h1>
 
-
-    <section class="actions">
-      <button class="btn primary" id="createBtn">
-        <span>＋</span> Create New Trip
+    <!-- Main entry actions: create, join, or host login -->
+    <section class="actions" aria-label="Trip actions">
+      <button class="btn primary" id="createBtn" type="button">
+        <span aria-hidden="true">＋</span> Create New Trip
       </button>
-      <button class="btn secondary" id="joinBtn">
-        <span>↗</span> Join a Trip
+      <button class="btn secondary" id="joinBtn" type="button">
+        <span aria-hidden="true">↗</span> Join a Trip
       </button>
-      <button class="btn host" id="hostBtn">
-        <span>♛</span> Host Login
+      <button class="btn host" id="hostBtn" type="button">
+        <span aria-hidden="true">♛</span> Host Login
       </button>
     </section>
 
-     <p class="description">
+    <p class="description">
       One trip, one shared queue, everyone's favourite songs.
       Request your tracks and let the host handle the playlist.
     </p>
-<h3 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-">Features</h3>
-    <section class="features">
+
+    <h2 class="features-title">Features</h2>
+    <section class="features" aria-label="TripTune features">
       <article>
-        <span class="feature-icon purple">♫</span>
+        <span class="feature-icon purple" aria-hidden="true">♫</span>
         <h3>Everyone Requests</h3>
         <p>Every member gets a voice.</p>
       </article>
       <article>
-        <span class="feature-icon blue">↻</span>
+        <span class="feature-icon blue" aria-hidden="true">↻</span>
         <h3>Always Saved</h3>
         <p>Return to your trip later.</p>
       </article>
       <article>
-        <span class="feature-icon green">✓</span>
+        <span class="feature-icon green" aria-hidden="true">✓</span>
         <h3>Host in Control</h3>
         <p>Track played and skipped songs.</p>
       </article>
     </section>
 
-    <div class="footer-note">
-      BUILT FOR LONG ROADS & GOOD MUSIC
-    </div>
+    <div class="footer-note">BUILT FOR LONG ROADS &amp; GOOD MUSIC</div>
   </main>
 
-  <dialog id="tripDialog">
+  <!-- Modal dialog: JavaScript inserts the correct fields for each action -->
+  <dialog id="tripDialog" aria-labelledby="dialogTitle">
     <form id="tripForm">
-      <button type="button" class="close" id="closeDialog"
-        aria-label="Close">×</button>
+      <button type="button" class="close" id="closeDialog" aria-label="Close dialog">×</button>
       <div class="eyebrow" id="dialogEyebrow">TRIPTUNE</div>
       <h2 id="dialogTitle">Create your trip</h2>
       <p id="dialogDescription">Set up your group's music room.</p>
       <div id="dialogFields"></div>
-      <p id="formError" class="error" role="alert"></p>
-      <button class="btn primary full" id="submitBtn" type="submit">
-        Continue →
-      </button>
+      <p id="formError" class="error" role="alert" aria-live="polite"></p>
+      <button class="btn primary full" id="submitBtn" type="submit">Continue →</button>
     </form>
   </dialog>
 
-<footer class="site-footer">
-  
-  <p> <span class="brand-icon">♫</span>© 2026 TripTune. All rights reserved.</p>
-  <p>Designed &amp; Developed by Harshil Nayi.</p>
-</footer>
+<!-- ========== FEEDBACK SECTION ========== -->
+<section class="feedback-section" id="feedback">
+  <div class="feedback-card">
+    <span class="feedback-tag">YOUR VOICE MATTERS</span>
 
+    <h2>Enjoying TripTune? 🎵</h2>
+
+    <p>
+      Share your experience and help us make every road trip better.
+    </p>
+
+    <button
+      type="button"
+      class="feedback-open-btn"
+      id="openFeedbackBtn"
+      aria-expanded="false"
+      aria-controls="feedbackFormWrap">
+      ★ Give Feedback
+    </button>
+
+    <!-- Form hidden until user clicks the feedback button -->
+    <div id="feedbackFormWrap" hidden>
+      <form id="feedbackForm">
+
+        <label class="feedback-label">
+          How would you rate TripTune?
+        </label>
+
+        <div class="star-rating" role="radiogroup"
+             aria-label="Rating from 1 to 5 stars">
+
+          <input type="radio" id="star5" name="rating" value="5" required>
+          <label for="star5" title="5 stars">★</label>
+
+          <input type="radio" id="star4" name="rating" value="4">
+          <label for="star4" title="4 stars">★</label>
+
+          <input type="radio" id="star3" name="rating" value="3">
+          <label for="star3" title="3 stars">★</label>
+
+          <input type="radio" id="star2" name="rating" value="2">
+          <label for="star2" title="2 stars">★</label>
+
+          <input type="radio" id="star1" name="rating" value="1">
+          <label for="star1" title="1 star">★</label>
+        </div>
+
+        <label class="feedback-label" for="feedbackName">
+          Your name (optional)
+        </label>
+        <input
+          type="text"
+          id="feedbackName"
+          name="from_name"
+          maxlength="80"
+          placeholder="Enter your name">
+
+    
+
+        <label class="feedback-label" for="feedbackMessage">
+          Your feedback *
+        </label>
+        <textarea
+          id="feedbackMessage"
+          name="message"
+          rows="5"
+          maxlength="2000"
+          placeholder="What did you like? What can we improve?"
+          required></textarea>
+
+        <!-- EmailJS template can use this variable -->
+        <input type="hidden" name="page_url" id="feedbackPageUrl">
+
+        <p id="feedbackStatus" role="status" aria-live="polite"></p>
+
+        <button
+          type="submit"
+          class="feedback-submit-btn"
+          id="feedbackSubmitBtn">
+          Send Feedback ✉
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- ========== END FEEDBACK SECTION ========== -->
+
+  <!-- Shared footer: stays after the main content on every screen -->
+  <footer class="site-footer">
+    <p><span class="brand-icon" aria-hidden="true">♫</span> © 2026 TripTune. All rights reserved.</p>
+    <p>Designed &amp; Developed by Harshil Nayi.</p>
+  </footer>
+
+  <!-- Application logic -->
+   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
